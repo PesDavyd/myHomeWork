@@ -466,6 +466,57 @@ void fiveth_third(){
     cout << str << "\n\n";
 }
 
+void fiveth_four(){
+    string array[10][18]; //count of x = 17, count of y = 10
+    array[0][0] = to_string(sin(90 * M_PI / 180));
+    array[1][0] = to_string(sin(60 * M_PI / 180));
+    array[2][0] = to_string(sin(45 * M_PI / 180));
+    array[3][0] = to_string(sin(30 * M_PI / 180));
+    array[4][0] = to_string(sin(0 * M_PI / 180));
+    array[5][0] = '-' + array[3][0];
+    array[6][0] = '-' + array[2][0];
+    array[7][0] = '-' + array[1][0];
+    array[8][0] = '-' + array[0][0];
+    array[9][0] = " ";
+
+    array[9][1] = "0";
+    array[9][2] = "30";
+    array[9][3] = "45";
+    array[9][4] = "60";
+    array[9][5] = "90";
+    array[9][6] = "120";
+    array[9][7] = "135";
+    array[9][8] = "150";
+    array[9][9] = "180";
+    array[9][10] = "210";
+    array[9][11] = "225";
+    array[9][12] = "240";
+    array[9][13] = "270";
+    array[9][14] = "300";
+    array[9][15] = "315";
+    array[9][16] = "330";
+    array[9][17] = "360";
+
+    int x[17];
+    for(int i = 0; i < 17; i++){
+        x[i] = stod(array[9][i + 1]);
+    }
+
+    for(int i = 0; i < 9; i++){
+        for(int j = 0; j < 18; j++){
+            double temp = sin(x[j - 1]* M_PI / 180);
+            if(array[i][0] == to_string(temp)) array[i][j] = "*";
+        }
+    }
+
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 18; j++){
+            cout << array[i][j] << '\t';
+        }
+        cout << '\n';
+    }   
+}
+
 int main(){
     int num;
     cout << "Input number of homework: ";
