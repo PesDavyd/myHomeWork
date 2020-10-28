@@ -3,6 +3,10 @@
 #include <string>
 #include <fstream>
 #include <stdlib.h>
+#include <random>
+#include <ctime>
+#include <vector>
+#include <map>
 using namespace std;
 
 #define M_PI 3.14159265358979323846
@@ -466,7 +470,173 @@ void fiveth_third(){
     cout << str << "\n\n";
 }
 
-void fiveth_four(){
+//complete
+void first_four(){
+    ofstream fout;
+    fout.open("file.txt");
+
+    if(fout.is_open()){
+        for(int i = 0; i < 10; i++){
+            cout << "Input num: ";
+            double temp;
+
+            while(!(cin >> temp)){
+                cout << "Input num: ";
+                cin >> temp;
+                cin.clear();
+
+                while(cin.get() != '\n') continue;
+            }
+
+            fout << temp << '\n';
+        }
+        fout.close();
+    }
+
+    ifstream fin;
+    fin.open("file.txt");
+
+    if(fin.is_open()){
+        string temp = "";
+        double temp_num, sum = 0;
+        while(getline(fin, temp)){
+            sum += stod(temp);
+            temp = "";
+        }
+        fin.close();
+        cout << "Sum = " << sum << "\n\n";
+    }
+}
+
+//helper-function
+int temp_f(double x){
+    if(x > 0) return 1;
+    else if(x == 0) return 0;
+    else return -1;
+}
+//complete
+void second_four(){
+    double x;
+
+    cout << "Input x: ";
+    while(!(cin >> x)){
+        cout << "Input x: ";
+        cin >> x;
+        cin.clear();
+        while(cin.get() != '\n') continue;
+    }
+
+    cout << temp_f(x) << "\n\n";
+}
+
+//helper-function
+double triangle(){
+    double a, b, c;
+
+    cout << "Input a: ";
+    while(!(cin >> a)){
+        cout << "Input a: ";
+        cin >> a;
+        cin.clear();
+        while(cin.get() != '\n') continue;
+    }
+
+    cout << "Input b: ";
+    while(!(cin >> b)){
+        cout << "Input b: ";
+        cin >> b;
+        cin.clear();
+        while(cin.get() != '\n') continue;
+    }
+
+    cout << "Input c: ";
+    while(!(cin >> c)){
+        cout << "Input c: ";
+        cin >> c;
+        cin.clear();
+        while(cin.get() != '\n') continue;
+    }
+
+    double P = a + b + c;
+
+    return sqrt(P * (P - a) * (P - b) * (P - c));
+}
+//helper-function
+double rectangle(){
+    double a, b;
+
+    cout << "Input a: ";
+    while(!(cin >> a)){
+        cout << "Input a: ";
+        cin >> a;
+        cin.clear();
+        while(cin.get() != '\n') continue;
+    }
+
+    cout << "Input b: ";
+    while(!(cin >> b)){
+        cout << "Input b: ";
+        cin >> b;
+        cin.clear();
+        while(cin.get() != '\n') continue;
+    }
+
+    return a * b;
+}
+//helper-function
+double circle(){
+    double R;
+    
+    cout << "Input R: ";
+    while(!(cin >> R)){
+        cout << "Input R: ";
+        cin >> R;
+        cin.clear();
+        while(cin.get() != '\n') continue;
+    }
+
+    return R * R * M_PI;
+}
+//complete
+void third_four(){
+    int search;
+    cout << "Input searching S(1/2/3): ";
+    while(!(cin >> search)){
+        cout << "Input searching S(1/2/3): ";
+        cin >> search;
+        cin.clear();
+        while(cin.get() != '\n') continue;
+    }
+
+    switch(search){
+        case 1: cout << "S rectogle = " << rectangle() << '\n'; break;
+        case 2: cout << "S triangle = " << triangle() << '\n'; break;
+        case 3: cout << "S circle = " << circle() << "\n"; break;
+    }
+    cout << '\n';
+}
+
+//complete
+void fourth_four(){
+    cout << " ______________________________________\n";
+    cout << "|* * * * * * * |||||||||||||||||||||||||\n";
+    cout << "|* * * * * * * |_______________________|\n";
+    cout << "|* * * * * * * |||||||||||||||||||||||||\n";
+    cout << "|* * * * * * * |_______________________|\n";
+    cout << "|* * * * * * * |||||||||||||||||||||||||\n";
+    cout << "|* * * * * * * |_______________________|\n";
+    cout << "|* * * * * *   |||||||||||||||||||||||||\n";
+    cout << "|______________|_______________________|\n";
+    cout << "||||||||||||||||||||||||||||||||||||||||\n";
+    cout << "|______________________________________|\n";
+    cout << "||||||||||||||||||||||||||||||||||||||||\n";
+    cout << "|______________________________________|\n";
+    cout << "||||||||||||||||||||||||||||||||||||||||\n\n";
+
+}
+
+//complite
+void fiveth_four_1(){
     string array[10][18]; //count of x = 17, count of y = 10
     array[0][0] = to_string(sin(90 * M_PI / 180));
     array[1][0] = to_string(sin(60 * M_PI / 180));
@@ -515,6 +685,263 @@ void fiveth_four(){
         }
         cout << '\n';
     }   
+}
+
+//complite
+void fiveth_four_2(){
+    system("python3 main.py");
+}
+
+//complete
+void sixth_four(){
+    string chars = "IVXLCDM";
+    string str = "";
+
+    while(true){
+        cout << "Input Roma number: ";
+        cin >> str;
+
+        bool flag = true;
+
+        for(int i = 0; i < str.length(); i++){
+            for(int j = 0; j < chars.length(); j++){
+                if(str[i] == chars[j]){
+                    flag = true;
+                    break;
+                }else{
+                    flag = false;
+                }
+            }
+            if(!flag) break;
+        }
+        if(flag) break;
+    }
+
+    map <char, int> roma = {
+        {'I', 1},
+        {'V', 5},
+        {'X', 10},
+        {'L', 50},
+        {'C', 100},
+        {'D', 500},
+        {'M', 1000}
+    };
+
+    int *array = new int [str.length()];
+    for(int i = 0; i < str.length(); i++) array[i] = roma[char(str[i])];
+
+    long long sum = 0;
+
+    for(int i = str.length() - 1; i >= 0; i--){
+        if(i == str.length() - 1) sum += array[i];
+        else{
+            if(array[i] < array[i + 1]) sum -= array[i];
+            else sum += array[i];
+        }
+    }
+    cout << sum;
+    cout << "\n\n";
+}
+
+//complete
+void seventh_four(){
+    srand(time(NULL));
+    
+    int i = rand(), m = rand(), c = rand();
+    cout << "S = " << (m * c + i) * abs(c) << "\n\n";
+}
+
+//helper-functions
+float max(float a, float b){
+    float max_;
+    a >= b ? max_ = a : max_ = b;
+    return max_;
+}
+float min(float a, float b){
+    float min_;
+    a <= b ? min_ = a : min_ = b;
+    return min_;
+}
+//complete
+void eighth_four(){
+    int A[3][4] = {
+        {5, 2, 0, 10},
+        {3, 5, 2, 5},
+        {20, 0, 0, 0}
+    };
+
+    float B[2][4] = {
+        {1.2, 2.8, 5, 2},
+        {0.5, 0.4, 1, 1.5}
+    };
+
+    float commission[] = {0, 0, 0};
+    float pay [] = {0, 0, 0};
+
+    float C[2][3] = {
+        {0, 0, 0}, // get pay
+        {0, 0, 0} // commission
+    };
+
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 4; j++){
+            C[0][i] += A[i][j] * B[0][j];
+            C[1][i] += A[i][j] * B[1][j];
+        }
+    }
+
+    float f = C[0][0], s = C[0][1], t = C[0][2];
+    string max__pay, max__comm, min__pay, min__comm;
+
+    {
+        {
+            float max_pay = max(f, max(s, t));
+            if(f == max_pay){
+                max__pay = "First seler have max. salary\n";
+            }else if(s== max_pay){
+                max__pay = "Second seler have max. salary\n";
+            }else{
+                max__pay = "Third seler have max. salary\n";
+            }
+        }
+
+        {
+            float max_comm = max(C[1][0], (C[1][1], C[1][2]));
+            if(max_comm == C[1][0]){
+                max__comm = "First seler have max. commission\n";
+            }else if(max_comm == C[1][1]){
+                max__comm = "Second seler have max. commission\n";
+            }else{
+                max__comm = "Third seler have max. commission\n";
+            }
+        }
+
+        {
+            float min_pay = min(f, min(s, t));
+            if(f == min_pay){
+                min__pay = "First seler have min. salary\n";
+            }else if(s == min_pay){
+                min__pay = "Second seler have min. salary\n";
+            }else{
+                min__pay = "Third seler have min. salary\n";
+            }
+        }
+
+        {
+            float min_comm = min(C[1][0], (C[1][1], C[1][2]));
+            if(min_comm == C[1][0]){
+                min__comm = "First seler have min. commission\n";
+            }else if(min_comm == C[1][1]){
+                min__comm = "Second seler have min. commission\n";
+            }else{
+                min__comm = "Third seler have min. commission\n";
+            }
+        }
+    }
+
+    float all_pay = C[0][0] + C[0][1] + C[0][2];
+    float all_commission = C[1][0] + C[1][1] + C[1][2];
+    float all_selary = all_pay - all_commission;
+    
+    cout << "1)\t" << max__pay << "\n\t" << min__pay << endl;
+    cout << "2)\t" << max__comm << "\n\t" << min__comm << endl;
+    cout << "3)\t" << all_selary << '\n';
+    cout << "4)\t" << all_commission << '\n';
+    cout << "5)\t" << all_pay << "\n\n";
+}
+
+//complete
+void nineth_four(){
+    string num = "";
+    while(true){
+        bool flag = true;
+
+        cout << "Input number (max 16 number system): ";
+        cin >> num;
+
+        for(int i = 0; i < num.length(); i++){
+            if(num[i] > 'F' || num[i] < 0) flag = false;
+            if(!flag){
+                break;
+            }
+        }
+
+        if(flag) break;
+    }
+
+    float ons;
+    cout << "Input old number system(max 16): ";
+    while(!(cin >> ons) && int(ons) != ons && ons <= 16){
+        cout << "Input old number system(max 16): ";
+        cin >> ons;
+        cin.clear();
+        while(cin.get() != '\n') continue;
+    }
+
+    float nns;
+    cout << "Input new number system(max 16): ";
+    while(!(cin >> nns) && int(nns) != nns && nns <= 16){
+        cout << "Input old number system(max 16): ";
+        cin >> nns;
+        cin.clear();
+        while(cin.get() != '\n') continue;
+    }
+
+    map <char, int> rebrand = {
+        {'0', 0},
+        {'1', 1},
+        {'2', 2},
+        {'3', 3},
+        {'4', 4},
+        {'5', 5},
+        {'6', 6},
+        {'7', 7},
+        {'8', 8},
+        {'9', 9},
+        {'A', 10},
+        {'B', 11},
+        {'C', 12},
+        {'D', 13},
+        {'E', 14},
+        {'F', 15}
+    };
+    map <int, char> rerebrand = {
+        {0, '0'},
+        {1, '1'},
+        {2, '2'},
+        {3, '3'},
+        {4, '4'},
+        {5, '5'},
+        {6, '6'},
+        {7, '7'},
+        {8, '8'},
+        {9, '9'},
+        {10, 'A'},
+        {11, 'B'},
+        {12, 'C'},
+        {13, 'D'},
+        {14, 'E'},
+        {15, 'F'}
+    };
+
+    int ten = 0;
+    for(int i = 0; i < num.length(); i++){ // remove to 10-ns
+        ten += rebrand[num[num.length() - i - 1]] * pow(ons, i);
+    }
+
+    vector <char> vec;
+
+    if(ten == 0) vec.push_back(rerebrand[0]);
+    while(ten != 0){
+        int temp = ten % int(nns);
+        vec.insert(vec.begin(), rerebrand[temp]);
+        ten /= nns;
+    }
+
+    cout << "New number: ";
+    for(auto i: vec) cout << i;
+
+    cout << "\n\n";
 }
 
 int main(){
@@ -566,6 +993,34 @@ int main(){
                     case 4: fourth_third(); break;
                     case 5: fiveth_third(); break;
                 };break;
+
+                case 4: switch(exe){
+                    case 1: first_four(); break;
+                    case 2: second_four(); break;
+                    case 3: third_four(); break;
+                    case 4: fourth_four(); break;
+                    case 5: 
+                        int k;
+                        while(true){
+                            cout << "Input release of example(1 | 2): ";
+                            while(!(cin >> k)){
+                                cout << "Input release of example(1 | 2): ";
+                                cin >> k;
+                                cin.clear();
+                                while(cin.get() != '\n') continue;
+                            }
+                            if(k == 1 || k == 2) break;
+                        }
+
+                        if(k == 1) fiveth_four_1();
+                        else fiveth_four_2();
+                    ;break;
+
+                    case 6: sixth_four(); break;
+                    case 7: seventh_four(); break;
+                    case 8: eighth_four(); break;
+                    case 9: nineth_four(); break;
+                }
             }
         }
         cout << "Input number of homework: ";
